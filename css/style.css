@@ -1,0 +1,41 @@
+body {
+  font-family: "Microsoft YaHei", Arial;
+  margin: 0;
+  background: #f6f8fa;
+}
+
+header {
+  background: #1f2937;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  background: #374151;
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 30px;
+  background: white;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #555;
+}
