@@ -1,48 +1,115 @@
-<script>
-  var password = prompt("请输入访问密码：");
-
-  if (password !== "robot123") {
-    alert("密码错误，无法访问！");
-    document.body.innerHTML = "";
-  }
-</script>
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>移动机器人实验平台</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>受保护页面</title>
+
+    <!-- ===== 强制密码校验（未通过绝不渲染页面） ===== -->
+    <script>
+        (function () {
+            const PASSWORD = "robot123";   // ← 改成你自己的密码
+            const KEY = "auth_ok";
+
+            // 已验证，直接放行
+            if (localStorage.getItem(KEY) === "ok") {
+                return;
+            }
+
+            // 未验证，立刻拦截
+            const input = prompt("请输入访问密码：");
+
+            if (input === PASSWORD) {
+                localStorage.setItem(KEY, "ok");
+            } else {
+                alert("密码错误，禁止访问！");
+                // 清空页面并跳走
+                document.documentElement.innerHTML = "";
+                location.replace("about:blank");
+            }
+        })();
+    </script>
+
+    <!-- ===== 页面样式 ===== -->
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+        }
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background: #374151;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 6px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        button {
+            padding: 8px 15px;
+            background: #ef4444;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
 </head>
+
 <body>
 
 <header>
-  <h1>移动机器人实验平台</h1>
-  <p>教学 · 实验 · 项目展示</p>
+    <h1>移动机器人实验教学平台</h1>
+    <p>内部访问 · 未授权禁止进入</p>
 </header>
 
 <nav>
-  <a href="index.html">首页</a>
-  <a href="experiment.html">实验内容</a>
+    <a href="#">首页</a>
+    <a href="#">实验内容</a>
+    <a href="#">资料下载</a>
 </nav>
 
 <main>
-  <h2>课程简介</h2>
-  <p>
-    本网站用于展示移动机器人相关实验内容，
-    包括路径规划、目标检测与系统设计。
-  </p>
+    <h2>课程简介</h2>
+    <p>
+        本网站用于移动机器人课程实验教学，
+        包括路径规划、目标检测与系统集成。
+    </p>
 
-  <h2>实验目标</h2>
-  <ul>
-    <li>理解机器人系统结构</li>
-    <li>掌握基本算法原理</li>
-    <li>完成实验验证</li>
-  </ul>
+    <h2>实验列表</h2>
+    <ul>
+        <li>实验一：PID 控制验证</li>
+        <li>实验二：A* 路径规划</li>
+        <li>实验三：目标检测与跟随</li>
+    </ul>
+
+    <h2>退出访问</h2>
+    <button onclick="localStorage.removeItem('auth_ok'); location.reload();">
+        退出并重新验证
+    </button>
 </main>
 
 <footer>
-  © 2026 机器人实验教学
+    © 2026 移动机器人实验教学
 </footer>
 
 </body>
