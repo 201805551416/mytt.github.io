@@ -1,42 +1,144 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>实验内容</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>移动机器人实验教学平台</title>
+
+    <!-- ===== 密码验证 ===== -->
+    <script>
+    (function(){
+        const PASSWORD = "robot123";  // ← 修改为你的密码
+        const AUTH_KEY = "auth_ok";
+
+        // 已验证，直接放行
+        if(localStorage.getItem(AUTH_KEY) === "ok") return;
+
+        // 未验证，弹窗要求输入密码
+        let input = prompt("请输入访问密码：");
+
+        if(input){
+            input = input.trim(); // 去掉前后空格
+            if(input === PASSWORD){
+                localStorage.setItem(AUTH_KEY, "ok"); // 保存验证状态
+            } else {
+                alert("密码错误，禁止访问！");
+                document.documentElement.innerHTML = ""; // 清空页面
+                location.replace("about:blank"); // 跳空白页
+            }
+        } else {
+            alert("密码不能为空！");
+            document.documentElement.innerHTML = "";
+            location.replace("about:blank");
+        }
+    })();
+    </script>
+
+    <!-- ===== 页面样式 ===== -->
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: #374151;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 6px;
+        }
+
+        h2 {
+            border-left: 5px solid #2563eb;
+            padding-left: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #ef4444;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #dc2626;
+        }
+    </style>
 </head>
+
 <body>
 
 <header>
-  <h1>实验一：移动机器人路径规划</h1>
+    <h1>移动机器人实验教学平台</h1>
+    <p>内部访问 · 未授权禁止进入</p>
 </header>
 
 <nav>
-  <a href="index.html">返回首页</a>
+    <a href="index.html">首页</a>
+    <a href="experiment.html">实验内容</a>
+    <a href="resources.html">资料下载</a>
 </nav>
 
 <main>
-  <h2>一、实验目的</h2>
-  <p>
-    掌握A*算法在移动机器人路径规划中的应用，
-    理解栅格地图建模方法。
-  </p>
+    <h2>一、课程简介</h2>
+    <p>
+        本网站用于移动机器人课程实验教学，
+        包括路径规划、目标检测与系统集成等内容。
+    </p>
 
-  <h2>二、实验原理</h2>
-  <p>
-    A*算法通过综合代价函数，实现最优路径搜索。
-  </p>
+    <h2>二、实验安排</h2>
+    <ul>
+        <li>实验一：PID 控制方法验证</li>
+        <li>实验二：A* 路径规划算法</li>
+        <li>实验三：目标检测与跟随</li>
+    </ul>
 
-  <h2>三、实验步骤</h2>
-  <ol>
-    <li>建立环境地图</li>
-    <li>设置起点和终点</li>
-    <li>运行路径规划算法</li>
-  </ol>
+    <h2>三、使用说明</h2>
+    <p>
+        本页面设置访问密码，输入正确才能浏览实验内容。
+    </p>
+
+    <h2>四、退出访问</h2>
+    <button onclick="localStorage.removeItem('auth_ok'); location.reload();">
+        退出并重新验证
+    </button>
 </main>
 
 <footer>
-  实验教学网页
+    © 2026 移动机器人实验教学
 </footer>
 
 </body>
